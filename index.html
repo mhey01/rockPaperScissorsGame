@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var cur_win = -1; // 0 for user 1 for computer
+      function computerPlay(){
+        var num = Math.floor(Math.random()*3);
+        if(num === 0){
+          return "Rock";
+        }
+        else if(num === 1){
+          return "Paper";
+        }
+        else if(num === 2){
+          return "Scissors";
+        }
+      }
+      function play(playerChoice, computerChoice){
+        playerChoice = playerChoice.toLowerCase();
+        computerChoice = computerChoice.toLowerCase();
+        if(playerChoice === computerChoice){
+          cur_win = -1;
+          return "It's a tie";
+        }
+        else if(playerChoice === "rock" && computerChoice === "paper"){
+          cur_win = 1;
+          return "You Lose! Paper defeats Rock";
+        }
+        else if(playerChoice === "rock" && computerChoice === "scissors"){
+          cur_win = 0;
+          return "You Win! Rock defeats scissors";
+        }
+        else if(playerChoice === "paper" && computerChoice === "rock"){
+          cur_win = 0;
+          return "You Win! Paper defeats Rock";
+        }
+        else if(playerChoice === "paper" && computerChoice === "scissors"){
+          cur_win = 1;
+          return "You Lose! Scissors defeats Paper";
+        }
+        else if(playerChoice === "scissors" && computerChoice === "rock"){
+          cur_win = 1;
+          return "You Lose! Rock defeats Scissors";
+        }
+        else if(playerChoice === "scissors" && computerChoice === "paper"){
+          cur_win = 0;
+          return "You Win! Scissors defeats Paper"
+        }
+      }
+      function game(){
+        var count = 0;
+        var comp_win = 0;
+        var usr_win = 0;
+        var num_games = prompt("How many games?")
+        while(count < num_games){
+          var comp_choice = computerPlay();
+          var usr_choice = prompt("Please enter rock paper or scissors");
+          console.log(play(usr_choice,comp_choice));
+          if(cur_win == -1){
+            console.log("User: ",usr_win, " Computer: ", comp_win);
+          }
+          else if(cur_win == 0){
+            usr_win++;
+            console.log("User: ",usr_win, " Computer: ", comp_win);
+          }
+          else if(cur_win == 1){
+            comp_win++;
+            console.log("User: ",usr_win, " Computer: ", comp_win);
+          }
+          count++;
+        }
+      }
+      game();
+    </script>
+  </body>
+</html>
